@@ -1,0 +1,117 @@
+Here's your prompt:
+
+Copy everything below this line:
+
+I need you to restructure this entire project so the root of the repo is clean and deployable to Vercel. Here is exactly what to do:
+1. Move everything to the repo root
+Move all files and folders from inside artifacts/joe-dumpsters/ up to the actual repository root. After moving, delete the now-empty artifacts folder entirely. The src folder, package.json, vite.config.ts, index.html, and all other project files should be directly at the root level with no nesting.
+2. Update all paths in vite.config.ts
+After the move, update any path aliases that referenced the old nested structure. The new vite.config.ts should look exactly like this:
+typescriptimport { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
+import path from "path";
+
+export default defineConfig({
+  plugins: [
+    react(),
+    tailwindcss(),
+  ],
+  resolve: {
+    alias: {
+      "@": path.resolve(import.meta.dirname, "src"),
+      "@assets": path.resolve(import.meta.dirname, "attached_assets"),
+    },
+    dedupe: ["react", "react-dom"],
+  },
+  root: path.resolve(import.meta.dirname),
+  build: {
+    outDir: path.resolve(import.meta.dirname, "dist"),
+    emptyOutDir: true,
+  },
+  server: {
+    port: 5000,
+    host: "0.0.0.0",
+    allowedHosts: true,
+  },
+});
+3. Add a vercel.json at the root
+Create this file at the repo root:
+json{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
+4. Replace the .gitignore at the root with exactly this:
+# =========================
+# Dependencies
+# =========================
+node_modules/
+# =========================
+# Build / output
+# =========================
+dist/
+build/
+out/
+.next/
+.nuxt/
+.vercel/
+.tmp/
+.cache/
+coverage/
+# =========================
+# Logs
+# =========================
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+# =========================
+# Environment variables
+# =========================
+.env
+.env.*
+!.env.example
+# =========================
+# Replit
+# =========================
+.replit
+.replit.nix
+.cache/
+.local/
+.upm/
+.config/
+# =========================
+# IDE / Editors
+# =========================
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+.idea/
+*.sublime-workspace
+*.sublime-project
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+# =========================
+# Misc
+# =========================
+*.tsbuildinfo
+.sass-cache/
+5. Verify the build works
+Run npm run build and confirm it completes with zero errors and outputs files to the dist folder at the root level. Then run npm run dev and confirm the site loads correctly in the Replit preview.
+6. Final check
+After everything is working, confirm the project structure at root level looks like this:
+/src
+/attached_assets
+/public (if it exists)
+package.json
+vite.config.ts
+index.html
+vercel.json
+.gitignore
+No artifacts folder, no nested subdirectories containing the project.

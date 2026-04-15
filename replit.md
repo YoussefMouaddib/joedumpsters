@@ -1,27 +1,46 @@
-# Workspace
+# Joe's Dumpsters Website
 
 ## Overview
 
-pnpm workspace monorepo using TypeScript. Each package manages its own dependencies.
+Frontend-only React + Vite website for Joe's Dumpsters — a dumpster rental and junk removal business based in Austin, TX. All files live at the repo root, ready for Vercel deployment.
 
 ## Stack
 
-- **Monorepo tool**: pnpm workspaces
-- **Node.js version**: 24
-- **Package manager**: pnpm
-- **TypeScript version**: 5.9
-- **API framework**: Express 5
-- **Database**: PostgreSQL + Drizzle ORM
-- **Validation**: Zod (`zod/v4`), `drizzle-zod`
-- **API codegen**: Orval (from OpenAPI spec)
-- **Build**: esbuild (CJS bundle)
+- **Framework**: React 19 + Vite
+- **Styling**: Tailwind CSS v4 + shadcn/ui components
+- **Routing**: Wouter
+- **Animations**: Framer Motion
+- **Language**: TypeScript
+
+## Project Structure
+
+```
+/src           — React source code (pages, components, hooks)
+/attached_assets — Business photos and logo used in the slideshow
+/dist          — Production build output (generated)
+package.json
+vite.config.ts
+index.html
+vercel.json    — Vercel deployment config (SPA rewrites)
+.gitignore
+```
 
 ## Key Commands
 
-- `pnpm run typecheck` — full typecheck across all packages
-- `pnpm run build` — typecheck + build all packages
-- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from OpenAPI spec
-- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- `pnpm --filter @workspace/api-server run dev` — run API server locally
+- `npm run dev` — Start development server on port 5000
+- `npm run build` — Production build to /dist
+- `npm run serve` — Preview the production build
 
-See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and package details.
+## Pages
+
+- `/` — Home with background slideshow, reviews, services overview
+- `/services` — Full services detail page
+- `/about` — Family-owned story and values
+- `/contact` — Phone, email, hours, service area
+
+## Deployment
+
+Vercel-ready via `vercel.json` at the root:
+- Build command: `npm run build`
+- Output directory: `dist`
+- SPA rewrites: all routes → index.html
