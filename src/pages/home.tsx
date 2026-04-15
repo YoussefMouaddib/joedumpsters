@@ -48,7 +48,7 @@ export default function Home() {
           </motion.div>
         </AnimatePresence>
 
-        <div className="container relative z-20 mx-auto px-4 text-center mt-10">
+        <div className="container relative z-20 mx-auto px-4 text-center mt-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
