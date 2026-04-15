@@ -48,7 +48,7 @@ export default function Home() {
           </motion.div>
         </AnimatePresence>
 
-        <div className="container relative z-20 mx-auto px-4 text-center mt-20">
+        <div className="container relative z-20 mx-auto px-4 text-center mt-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -58,7 +58,7 @@ export default function Home() {
             <div className="inline-flex items-center gap-2 bg-primary/20 text-primary border border-primary/30 px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wider mb-6 backdrop-blur-md">
               <MapPin className="w-4 h-4" /> Serving Austin, TX & Surrounding Areas
             </div>
-            <h1 className="text-5xl md:text-6xl font-extrabold text-white leading-tight mb-6 drop-shadow-lg">
+            <h1 className="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6 drop-shadow-lg">
               Say goodbye to unwanted junk with <span className="text-primary">Joe's Dumpsters</span>
             </h1>
             <p className="text-xl md:text-2xl text-slate-200 mb-10 max-w-2xl mx-auto font-medium">
